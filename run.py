@@ -1,4 +1,3 @@
-cat << 'EOF' > run.py
 import os
 import subprocess
 import time
@@ -77,4 +76,3 @@ def run_single_bot():
 
 if __name__ == '__main__':
     run_single_bot()
-EOF
