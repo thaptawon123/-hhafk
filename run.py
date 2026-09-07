@@ -41,22 +41,22 @@ def run_single_bot():
     threading.Thread(target=read_output, args=(p,), daemon=True).start()
     try:
         print('⏳ รอเชื่อมต่อเซิร์ฟเวอร์ (12 วินาที)...')
-        time.sleep(12)
+        time.sleep(20)
         if p.poll() is not None: return
         print('🔑 กำลังส่งรหัสผ่าน...')
         p.stdin.write('/dialog set pass tang2547\\n')
         p.stdin.flush()
-        time.sleep(3)
+        time.sleep(10)
         if p.poll() is not None: return
         print('🖱️ ยืนยันเข้าสู่ระบบ...')
         p.stdin.write('/dialog click 1\\n')
         p.stdin.flush()
-        time.sleep(5)
+        time.sleep(10)
         if p.poll() is not None: return
         print('🔐 ข้าม/จัดการ 2FA...')
         p.stdin.write('/dialog click 2\\n')
         p.stdin.flush()
-        time.sleep(5)
+        time.sleep(10)
         if p.poll() is not None: return
         print('🤖 กำลังรันคำสั่ง AFK เสถียร...')
         for cmd in ['/useitem\\n', '/inventory container click 10\\n', '/afk\\n']:
