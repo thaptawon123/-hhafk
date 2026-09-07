@@ -1,14 +1,13 @@
+cat << 'EOF' > run.py
 import os
 import subprocess
 import time
 import threading
 
-# กำหนดโฟลเดอร์ที่เก็บไฟล์บอทตัวเดียวของคุณ (ตามภาพโครงสร้างโปรเจกต์)
-BOT_DIR = os.path.expanduser("~/afk/afk r/yoooo12")
+BOT_DIR = os.path.expanduser("~/-hhafk-main/yoooo12")
 EXE_PATH = os.path.join(BOT_DIR, "MinecraftClient")
 
 def read_output(p):
-    """อ่าน Log จากตัวบอทมาแสดงผลแบบ Real-time"""
     while p.poll() is None:
         line = p.stdout.readline()
         if line:
@@ -19,15 +18,13 @@ def run_single_bot():
         print(f"❌ ไม่พบไฟล์รันบอทที่: {EXE_PATH}")
         return
 
-    # ให้สิทธิ์รันไฟล์ (chmod +x)
     try:
         os.chmod(EXE_PATH, 0o755)
     except Exception:
         pass
 
-    print(กำลังเริ่มรันบอทจากโฟลเดอร์: {BOT_DIR}...)
+    print(f"กำลังเริ่มรันบอทจากโฟลเดอร์: {BOT_DIR}...")
 
-    # รันกระบวนการ (Process) ของ MinecraftClient
     p = subprocess.Popen(
         [EXE_PATH],
         cwd=BOT_DIR,
@@ -39,10 +36,8 @@ def run_single_bot():
         errors="replace"
     )
 
-    # เปิด Thread แยกสำหรับอ่านข้อความในเกม
     threading.Thread(target=read_output, args=(p,), daemon=True).start()
 
-    # ขั้นตอนการส่งคำสั่งอัตโนมัติ (Login & เข้าเซิร์ฟเวอร์ตามลำดับเวลา)
     try:
         print("⏳ รอเชื่อมต่อเซิร์ฟเวอร์ (12 วินาที)...")
         time.sleep(12)
@@ -75,8 +70,6 @@ def run_single_bot():
             time.sleep(5)
 
         print("✅ บอททำงานออนไลน์และรัน AFK สำเร็จเรียบร้อย!")
-        
-        # คอยประคองให้บอทเปิดทำงานค้างไว้เรื่อยๆ
         p.wait()
 
     except Exception as e:
@@ -84,3 +77,4 @@ def run_single_bot():
 
 if __name__ == '__main__':
     run_single_bot()
+EOF
